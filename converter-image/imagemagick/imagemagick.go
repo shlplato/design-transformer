@@ -88,7 +88,7 @@ func convert(ctx context.Context, inputBucket, outputBucket, name string) error 
 	paths = append(paths, "")
 	copy(paths[3:], paths[2:])
 	paths[2] = convertType
-	name = "/" + strings.Join(paths, "/")
+	name = strings.Join(paths, "/")
 	outputBlob := storageClient.Bucket(outputBucket).Object(name)
 	w := outputBlob.NewWriter(ctx)
 	defer w.Close()
