@@ -84,7 +84,7 @@ func convert(ctx context.Context, inputBucket, outputBucket, name string) error 
 	}
 
 	paths := strings.Split(name, "/")
-	paths[3] = strings.Replace(paths[3], ".psd",".png", -1)
+	paths[2] = strings.Replace(paths[2], ".psd",".png", -1)
 	paths = append(paths, "")
 	copy(paths[3:], paths[2:])
 	paths[2] = convertType
