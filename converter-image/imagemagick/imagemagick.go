@@ -83,12 +83,13 @@ func convert(ctx context.Context, inputBucket, outputBucket, name string) error 
 		convertType = "spreadshirt"
 	}
 
-	paths := strings.Split(name, "/");
-	paths = append(paths, "");
-	copy(paths[3:], paths[2:]);
-	paths[2] = convertType;
-	name = strings.Join(paths, "/"); 
-	outputBlob := storageClient.Bucket(outputBucket).Object(convertType + "/" + strings.Replace(name, ".psd",".png", -1))
+	paths := strings.Split(name, "/")
+	paths[3] = strings.Replace(paths[3], ".psd",".png", -1)
+	paths = append(paths, "")
+	copy(paths[3:], paths[2:])
+	paths[2] = convertType
+	name = "/" + strings.Join(paths, "/")
+	outputBlob := storageClient.Bucket(outputBucket).Object(name)
 	w := outputBlob.NewWriter(ctx)
 	defer w.Close()
 
